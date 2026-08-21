@@ -20,7 +20,80 @@ A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissan
 
 [![Run on Replit](https://replit.com/badge/github/USERNAME/REPOSITORY)](https://replit.com/github/USERNAME/REPOSITORY)
 
+## 🛠️ Complete CLI Reference
 
+```
+usage: AnonymousTrace [-h] [--site SITES] [--timeout TIMEOUT] [--proxy PROXY_URL]
+                   [--tor] [--unique-tor] [--dump-response] [--json JSON_FILE]
+                   [--print-all] [--print-found] [--no-color] [--browse]
+                   [--local] [--nsfw] [--txt] [--ignore-exclusions]
+                   [--data-file DATA_FILE] [--verbose] [--folderoutput FOLDEROUTPUT]
+                   [--output OUTPUT] [--csv] [--xlsx] [--version] [-s] [--super]
+                   [--fast] [--deep] [--stealth] [--list-sites] [--plain]
+                   [--workers WORKERS] [--min-confidence {found,likely,unknown}]
+                   [--rate-limit RATE_LIMIT] [--input-file INPUT_FILE]
+                   USERNAMES [USERNAMES ...]
+
+positional arguments:
+  USERNAMES             One or more usernames to check with social networks
+
+options:
+  -h, --help            show this help message and exit
+  --site SITES          Limit analysis to just the listed sites (repeatable)
+  --timeout TIMEOUT     Time (in seconds) to wait for response to requests (Default: 60)
+  --proxy, -p PROXY_URL
+                        Make requests over a proxy. e.g. socks5://127.0.0.1:1080
+  --tor                 Route through Tor SOCKS proxy
+  --unique-tor          Route through Tor, requesting a new circuit per request
+  --dump-response       Dump the HTTP response to stdout for targeted debugging
+  --json JSON_FILE      JSON output file
+  --print-all           Output sites where the username was not found
+  --print-found         Output sites where the username was found (also if exported as file)
+  --no-color            Don't color terminal output
+  --browse, -b          Browse to all results on default browser
+  --local, -l           Force the use of the local data.json file
+  --nsfw                Include checking of NSFW sites from default list
+  --txt                 Enable creation of a txt file
+  --ignore-exclusions   Ignore upstream exclusions (may return more false positives)
+  --data-file DATA_FILE
+                        Load data from a JSON file or an online, valid, JSON file
+  --verbose, -v, -d, --debug
+                        Display extra debugging information and metrics
+  --folderoutput, -fo FOLDEROUTPUT
+                        If using multiple usernames, the output of the results will be saved to this folder
+  --output, -o OUTPUT   If using single username, the output of the result will be saved to this file
+  --input-file INPUT_FILE
+                        Batch usernames from a text file (one per line)
+  --csv                 Create Comma-Separated Values (CSV) File
+  --xlsx                Create the standard file for the modern Microsoft Excel spreadsheet
+  --version             show program's version number and exit
+  -s, --scan            Quick scan mode - fast scan with default settings
+  --super               Super mode - enables verbose output, print-all, and JSON export
+  --fast                Fast mode - high speed scan with reduced timeout
+  --deep                Deep mode - thorough scan with extended timeout and all sites
+  --stealth             Stealth mode - slow scan with low profile (rate limiting + Tor)
+  --list-sites          List all available platforms and exit
+  --plain               Plain text output - simple list format without tables
+  --workers WORKERS     Concurrent worker threads (default: 20)
+  --min-confidence {found,likely,unknown}
+                        Minimum confidence level to report (default: unknown)
+  --rate-limit RATE_LIMIT
+                        Polite throttle in seconds between requests to the same host
+```
+
+
+### 📝 Terminal Output (Plain Text)
+```
+[*] Checking username user123 on:
+[+] 9GAG: https://www.9gag.com/u/user123
+[+] AskFM: https://ask.fm/user123
+[+] BitBucket: https://bitbucket.org/user123
+[+] GitHub: https://github.com/user123
+[+] GitLab: https://gitlab.com/user123
+[+] Reddit: https://www.reddit.com/user/user123
+[+] YouTube: https://www.youtube.com/@user123
+[*] Search completed with 29 results.
+```
 
 ## 🚀 Installation
 
@@ -97,22 +170,6 @@ python -m anonymoustrace.main user123
 **To search for more than one user:**
 ```bash
 python -m anonymoustrace.main user1 user2 user3
-```
-
-### 📝 Plain Text Output
-```bash
-python -m anonymoustrace.main --plain username
-```
-Output:
-```
-[*] Checking username user123 on:
-[+] 9GAG: https://www.9gag.com/u/user123
-[+] AskFM: https://ask.fm/user123
-[+] GitHub: https://github.com/user123
-[+] GitLab: https://gitlab.com/user123
-[+] Reddit: https://www.reddit.com/user/user123
-[+] YouTube: https://www.youtube.com/@user123
-[*] Search completed with 29 results.
 ```
 
 ### 📋 List All Platforms
@@ -229,67 +286,6 @@ python -m anonymoustrace.main username --data-file ./custom_registry.json
 python -m anonymoustrace.main username --data-file https://example.com/registry.json
 ```
 
-## 🛠️ Complete CLI Reference
-
-```
-usage: AnonymousTrace [-h] [--site SITES] [--timeout TIMEOUT] [--proxy PROXY_URL]
-                   [--tor] [--unique-tor] [--dump-response] [--json JSON_FILE]
-                   [--print-all] [--print-found] [--no-color] [--browse]
-                   [--local] [--nsfw] [--txt] [--ignore-exclusions]
-                   [--data-file DATA_FILE] [--verbose] [--folderoutput FOLDEROUTPUT]
-                   [--output OUTPUT] [--csv] [--xlsx] [--version] [-s] [--super]
-                   [--fast] [--deep] [--stealth] [--list-sites] [--plain]
-                   [--workers WORKERS] [--min-confidence {found,likely,unknown}]
-                   [--rate-limit RATE_LIMIT] [--input-file INPUT_FILE]
-                   USERNAMES [USERNAMES ...]
-
-positional arguments:
-  USERNAMES             One or more usernames to check with social networks
-
-options:
-  -h, --help            show this help message and exit
-  --site SITES          Limit analysis to just the listed sites (repeatable)
-  --timeout TIMEOUT     Time (in seconds) to wait for response to requests (Default: 60)
-  --proxy, -p PROXY_URL
-                        Make requests over a proxy. e.g. socks5://127.0.0.1:1080
-  --tor                 Route through Tor SOCKS proxy
-  --unique-tor          Route through Tor, requesting a new circuit per request
-  --dump-response       Dump the HTTP response to stdout for targeted debugging
-  --json JSON_FILE      JSON output file
-  --print-all           Output sites where the username was not found
-  --print-found         Output sites where the username was found (also if exported as file)
-  --no-color            Don't color terminal output
-  --browse, -b          Browse to all results on default browser
-  --local, -l           Force the use of the local data.json file
-  --nsfw                Include checking of NSFW sites from default list
-  --txt                 Enable creation of a txt file
-  --ignore-exclusions   Ignore upstream exclusions (may return more false positives)
-  --data-file DATA_FILE
-                        Load data from a JSON file or an online, valid, JSON file
-  --verbose, -v, -d, --debug
-                        Display extra debugging information and metrics
-  --folderoutput, -fo FOLDEROUTPUT
-                        If using multiple usernames, the output of the results will be saved to this folder
-  --output, -o OUTPUT   If using single username, the output of the result will be saved to this file
-  --input-file INPUT_FILE
-                        Batch usernames from a text file (one per line)
-  --csv                 Create Comma-Separated Values (CSV) File
-  --xlsx                Create the standard file for the modern Microsoft Excel spreadsheet
-  --version             show program's version number and exit
-  -s, --scan            Quick scan mode - fast scan with default settings
-  --super               Super mode - enables verbose output, print-all, and JSON export
-  --fast                Fast mode - high speed scan with reduced timeout
-  --deep                Deep mode - thorough scan with extended timeout and all sites
-  --stealth             Stealth mode - slow scan with low profile (rate limiting + Tor)
-  --list-sites          List all available platforms and exit
-  --plain               Plain text output - simple list format without tables
-  --workers WORKERS     Concurrent worker threads (default: 20)
-  --min-confidence {found,likely,unknown}
-                        Minimum confidence level to report (default: unknown)
-  --rate-limit RATE_LIMIT
-                        Polite throttle in seconds between requests to the same host
-```
-
 ## 🔍 Detection Strategies
 
 1. **📊 Status Code**: Determines availability based on HTTP status (200 vs 404)
@@ -339,19 +335,6 @@ This tool is designed for authorized, legitimate OSINT purposes only. See [ETHIC
 
 ### 🖥️ Terminal Output (Rich Table)
 Color-coded table showing detection status, confidence level, HTTP status code, and any errors.
-
-### 📝 Terminal Output (Plain Text)
-```
-[*] Checking username user123 on:
-[+] 9GAG: https://www.9gag.com/u/user123
-[+] AskFM: https://ask.fm/user123
-[+] BitBucket: https://bitbucket.org/user123
-[+] GitHub: https://github.com/user123
-[+] GitLab: https://gitlab.com/user123
-[+] Reddit: https://www.reddit.com/user/user123
-[+] YouTube: https://www.youtube.com/@user123
-[*] Search completed with 29 results.
-```
 
 ### 📄 JSON Export
 ```json
