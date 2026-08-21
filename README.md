@@ -5,6 +5,35 @@ A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissan
 <img width="1193" height="545" alt="Image" src="https://github.com/user-attachments/assets/28c62126-c64e-4b56-a656-a349abf2a6ec" />
 <img width="800" height="830" alt="Image" src="https://github.com/user-attachments/assets/70ae689c-1ff6-4aca-a45b-7bb1ba15fbe3" />
 
+
+
+## 🏗️ MVC Architecture
+
+AnonymousTrace follows a clean **Model-View-Controller** separation for maintainability and extensibility.
+
+```
+anonymoustrace/
+├── data/
+│   └── registry.json          ← Model: platform definitions
+├── models/
+│   └── __init__.py            ← Model: Site, ScanResult, ConfidenceLevel, ErrorType
+├── features/
+│   ├── detection/
+│   │   └── detectors.py       ← Controller: detection strategies (status_code, message, response_url, hybrid)
+│   └── scanning/
+│       ├── concurrent_scanner.py ← Controller: bounded thread-pool scan orchestrator
+│       ├── http_client.py        ← Controller: HTTP session, retries, proxy/Tor
+│       └── registry_loader.py    ← Controller: JSON registry loader with validation
+├── services/
+│   ├── detection_service.py   ← Controller: detection orchestration and strategy selection
+│   ├── export_service.py      ← Controller: JSON/CSV/XLSX/TXT export
+│   ├── proxy_service.py       ← Controller: proxy validation and Tor routing
+│   ├── resilience_service.py  ← Controller: retry with exponential backoff + jitter
+│   └── scan_service.py        ← Controller: top-level scan pipeline wiring
+└── main.py                    ← View: CLI (argparse) + Rich terminal output
+```
+
+
 ## ✨ Features
 - **📊 Data-Driven Architecture**: Platform definitions stored in JSON registry - add new sites without code changes
 - **🔍 Multiple Detection Strategies**: Status code, message content, response URL analysis, and hybrid confidence scoring
@@ -294,33 +323,6 @@ python -m anonymoustrace.main username --data-file ./custom_registry.json
 # Online URL
 python -m anonymoustrace.main username --data-file https://example.com/registry.json
 ```
-
-## 🏗️ MVC Architecture
-
-AnonymousTrace follows a clean **Model-View-Controller** separation for maintainability and extensibility.
-
-```
-anonymoustrace/
-├── data/
-│   └── registry.json          ← Model: platform definitions
-├── models/
-│   └── __init__.py            ← Model: Site, ScanResult, ConfidenceLevel, ErrorType
-├── features/
-│   ├── detection/
-│   │   └── detectors.py       ← Controller: detection strategies (status_code, message, response_url, hybrid)
-│   └── scanning/
-│       ├── concurrent_scanner.py ← Controller: bounded thread-pool scan orchestrator
-│       ├── http_client.py        ← Controller: HTTP session, retries, proxy/Tor
-│       └── registry_loader.py    ← Controller: JSON registry loader with validation
-├── services/
-│   ├── detection_service.py   ← Controller: detection orchestration and strategy selection
-│   ├── export_service.py      ← Controller: JSON/CSV/XLSX/TXT export
-│   ├── proxy_service.py       ← Controller: proxy validation and Tor routing
-│   ├── resilience_service.py  ← Controller: retry with exponential backoff + jitter
-│   └── scan_service.py        ← Controller: top-level scan pipeline wiring
-└── main.py                    ← View: CLI (argparse) + Rich terminal output
-```
-
 ### 📦 Model Layer
 
 Responsible for **data structures and state**.
@@ -532,4 +534,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](MIT) file for details.
