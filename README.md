@@ -290,6 +290,110 @@ python -m anonymoustrace.main username --data-file ./custom_registry.json
 python -m anonymoustrace.main username --data-file https://example.com/registry.json
 ```
 
+## 🏗️ MVC Architecture
+
+AnonymousTrace follows a clean **Model-View-Controller** separation for maintainability and extensibility.
+
+```
+anonymoustrace/
+├── data/
+│   └── registry.json          ← Model: platform definitions
+├── models/
+│   └── __init__.py            ← Model: Site, ScanResult, ConfidenceLevel, ErrorType
+├── features/
+│   ├── detection/
+│   │   └── detectors.py       ← Controller: detection strategies (status_code, message, response_url, hybrid)
+│   └── scanning/
+│       ├── concurrent_scanner.py ← Controller: bounded thread-pool scan orchestrator
+│       ├── http_client.py        ← Controller: HTTP session, retries, proxy/Tor
+│       └── registry_loader.py    ← Controller: JSON registry loader with validation
+├── services/
+│   ├── detection_service.py   ← Controller: detection orchestration and strategy selection
+│   ├── export_service.py      ← Controller: JSON/CSV/XLSX/TXT export
+│   ├── proxy_service.py       ← Controller: proxy validation and Tor routing
+│   ├── resilience_service.py  ← Controller: retry with exponential backoff + jitter
+│   └── scan_service.py        ← Controller: top-level scan pipeline wiring
+└── main.py                    ← View: CLI (argparse) + Rich terminal output
+```
+
+### 📦 Model Layer
+
+Responsible for **data structures and state**.
+
+| Component | File | Responsibility |
+|-----------|------|----------------|
+| `Site` | `models/__init__.py` | Platform definition: URL patterns, error types, headers, regex validation |
+| `ScanResult` | `models/__init__.py` | Single scan outcome: detected status, confidence, HTTP code, error, metadata |
+| `ConfidenceLevel` | `models/__init__.py` | Enum: `found`, `likely`, `unknown`, `not_found` |
+| `ErrorType` | `models/__init__.py` | Enum: `status_code`, `message`, `response_url`, `hybrid` |
+| `registry.json` | `data/registry.json` | 100+ platform definitions — add new sites here without code changes |
+
+### 🎨 View Layer
+
+Responsible for **user interaction and presentation**.
+
+| Component | File | Responsibility |
+|-----------|------|----------------|
+| CLI parser | `main.py:build_parser()` | `argparse` setup — flags, positional args, help text |
+| Banner | `main.py:BANNER` | Rich ASCII art + authorization notice |
+| Terminal tables | `main.py` | Color-coded Rich tables, progress bars, live updates |
+| Export triggers | `main.py` | Calls `ExportService` after scan completes |
+
+### ⚙️ Controller Layer
+
+Responsible for **business logic and orchestration**.
+
+| Component | File | Responsibility |
+|-----------|------|----------------|
+| `ScanService` | `services/scan_service.py` | Top-level pipeline: load registry → scan → export |
+| `DetectionService` | `services/detection_service.py` | Selects and runs the correct detector per site |
+| `ConcurrentScanner` | `features/scanning/concurrent_scanner.py` | Bounded `ThreadPoolExecutor` scan with confidence filtering |
+| `HTTPClient` | `features/scanning/http_client.py` | `requests.Session` with pooling, retries, proxy/Tor |
+| `RegistryLoader` | `features/scanning/registry_loader.py` | Loads `registry.json` from disk or URL, validates entries |
+| Detectors | `features/detection/detectors.py` | `StatusCodeDetector`, `MessageDetector`, `ResponseUrlDetector`, `HybridDetector` |
+| `ExportService` | `services/export_service.py` | Writes results to JSON, CSV, XLSX, TXT |
+| `ProxyService` / `TorService` | `services/proxy_service.py` | Proxy URL validation, Tor SOCKS routing |
+| `retry_with_backoff` | `services/resilience_service.py` | Exponential backoff + jitter decorator for resilient HTTP calls |
+
+### 🔄 Data Flow
+
+```
+User Input (CLI)
+       │
+       ▼
+┌─────────────────┐
+│   main.py       │  ← View: parse args, display banner
+│  (Controller)   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  ScanService    │  ← Controller: orchestrate pipeline
+│  RegistryLoader │  ← Load sites from data/registry.json (Model)
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ ConcurrentScanner│ ← Controller: spawn workers
+│   HTTPClient    │ ← Controller: make requests with retry/proxy
+│   Detectors     │ ← Controller: analyze response → ScanResult (Model)
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  ExportService  │ ← Controller: write JSON/CSV/XLSX/TXT
+│  Rich Tables    │ ← View: print results to terminal
+└─────────────────┘
+```
+
+### 🧩 Extending the Framework
+
+**Add a new platform:** Edit `data/registry.json` — no code changes needed.
+
+**Add a new detection strategy:** Create a new `BaseDetector` subclass in `features/detection/detectors.py` and register it in `build_detector()`.
+
+**Add a new export format:** Extend `ExportService` in `services/export_service.py` and wire it into `ScanService.execute()`.
+
 ## 🔍 Detection Strategies
 
 1. **📊 Status Code**: Determines availability based on HTTP status (200 vs 404)
