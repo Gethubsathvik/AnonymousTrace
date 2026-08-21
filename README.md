@@ -2,7 +2,6 @@
 A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissance tool that checks whether usernames are registered on 100+ public platforms using only unauthenticated, publicly accessible endpoints.
 
 ## ✨ Features
-
 - **📊 Data-Driven Architecture**: Platform definitions stored in JSON registry - add new sites without code changes
 - **🔍 Multiple Detection Strategies**: Status code, message content, response URL analysis, and hybrid confidence scoring
 - **⚡ High Performance**: Concurrent scanning with bounded worker pools and rate limiting
@@ -124,6 +123,11 @@ Or with docker-compose:
 ```bash
 docker-compose run --rm anonymoustrace github gitlab --print-found
 ```
+
+## SET Path
+$env:Path = [Environment]::GetEnvironmentVariable('Path', 'User')
+AnonymousTrace -h
+
 
 ## 🎯 Quick Start
 
