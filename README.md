@@ -13,8 +13,9 @@ A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissan
 - **⚖️ Ethical Use**: Built-in authorization banner and ETHICS guidelines
 - **🦸 Superpowers**: Advanced scanning modes (--fast, --deep, --stealth, --super)
 
+<img width="1153" height="540" alt="Image" src="https://github.com/user-attachments/assets/047f05ad-8c76-4f27-94ee-c50dce5bcbd1" />
+<img width="800" height="830" alt="Image" src="https://github.com/user-attachments/assets/70ae689c-1ff6-4aca-a45b-7bb1ba15fbe3" />
 
-https://github.com/Gethubsathvik/Voip_intenationals_calls/blob/71fd4eb91f5714f35abe85c3c22d513db7547d88/Screenshot%202026-08-21%20145630.png
 
 
 ## Test Run Here
