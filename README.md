@@ -2,7 +2,7 @@
 A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissance tool that checks whether usernames are registered on 100+ public platforms using only unauthenticated, publicly accessible endpoints.
 
 
-<img width="1153" height="540" alt="Image" src="https://github.com/user-attachments/assets/452f624b-d641-4330-a963-38a37d9e898f" />
+<img width="1193" height="545" alt="Image" src="https://github.com/user-attachments/assets/28c62126-c64e-4b56-a656-a349abf2a6ec" />
 <img width="800" height="830" alt="Image" src="https://github.com/user-attachments/assets/70ae689c-1ff6-4aca-a45b-7bb1ba15fbe3" />
 
 ## ✨ Features
