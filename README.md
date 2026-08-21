@@ -14,6 +14,10 @@ A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissan
 - **⚖️ Ethical Use**: Built-in authorization banner and ETHICS guidelines
 - **🦸 Superpowers**: Advanced scanning modes (--fast, --deep, --stealth, --super)
 
+
+## [![Open in Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=YOUR_GITHUB_REPO_URL)
+
+
 ## 🚀 Installation
 
 ### 📦 Using pipx (Recommended)
