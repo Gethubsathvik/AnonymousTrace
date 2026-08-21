@@ -1,6 +1,10 @@
 # 🕵️ AnonymousTrace
 A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissance tool that checks whether usernames are registered on 100+ public platforms using only unauthenticated, publicly accessible endpoints.
 
+
+<img width="1153" height="540" alt="Image" src="https://github.com/user-attachments/assets/047f05ad-8c76-4f27-94ee-c50dce5bcbd1" />
+<img width="800" height="830" alt="Image" src="https://github.com/user-attachments/assets/70ae689c-1ff6-4aca-a45b-7bb1ba15fbe3" />
+
 ## ✨ Features
 - **📊 Data-Driven Architecture**: Platform definitions stored in JSON registry - add new sites without code changes
 - **🔍 Multiple Detection Strategies**: Status code, message content, response URL analysis, and hybrid confidence scoring
@@ -12,10 +16,6 @@ A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissan
 - **🧪 Well Tested**: Comprehensive test suite with CI/CD pipelines
 - **⚖️ Ethical Use**: Built-in authorization banner and ETHICS guidelines
 - **🦸 Superpowers**: Advanced scanning modes (--fast, --deep, --stealth, --super)
-
-<img width="1153" height="540" alt="Image" src="https://github.com/user-attachments/assets/047f05ad-8c76-4f27-94ee-c50dce5bcbd1" />
-<img width="800" height="830" alt="Image" src="https://github.com/user-attachments/assets/70ae689c-1ff6-4aca-a45b-7bb1ba15fbe3" />
-
 
 
 ## Test Run Here
