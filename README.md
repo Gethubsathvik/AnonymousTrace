@@ -15,7 +15,11 @@ A data-driven, extensible OSINT (Open-Source Intelligence) username reconnaissan
 - **🦸 Superpowers**: Advanced scanning modes (--fast, --deep, --stealth, --super)
 
 
-## [![Open in Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=YOUR_GITHUB_REPO_URL)
+## Test Run Here
+[![Open in Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=YOUR_GITHUB_REPO_URL)
+
+[![Run on Replit](https://replit.com/badge/github/USERNAME/REPOSITORY)](https://replit.com/github/USERNAME/REPOSITORY)
+
 
 
 ## 🚀 Installation
