@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  anonymoustrace:
+    build: .
+    container_name: anonymoustrace
+    volumes:
+      - ./data:/app/anonymoustrace/data:ro
+      - ./output:/app/output
+    command: ["--help"]
+    # Example usage:
+    # command: ["twitter", "github", "--print-found", "--json", "/app/output/results.json"]

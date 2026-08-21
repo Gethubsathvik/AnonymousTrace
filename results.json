@@ -1,0 +1,17 @@
+{
+  "username": "octocat",
+  "count": 1,
+  "results": [
+    {
+      "username": "octocat",
+      "site": "GitHub",
+      "detected": true,
+      "confidence": "found",
+      "status_code": 200,
+      "response_url": "https://github.com/octocat",
+      "response_size": null,
+      "error": null,
+      "metadata": {}
+    }
+  ]
+}

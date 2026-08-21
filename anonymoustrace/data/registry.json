@@ -1,0 +1,918 @@
+{
+  "GitHub": {
+    "errorType": "status_code",
+    "url": "https://github.com/{}",
+    "urlMain": "https://github.com/",
+    "regexCheck": "^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$",
+    "username_claimed": "octocat",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Twitter": {
+    "errorType": "message",
+    "url": "https://twitter.com/{}",
+    "urlMain": "https://twitter.com/",
+    "urlProbe": "https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names={}",
+    "errorMsg": "User not found",
+    "regexCheck": "^[a-zA-Z0-9_]{1,15}$",
+    "username_claimed": "twitter",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Instagram": {
+    "errorType": "message",
+    "url": "https://www.instagram.com/{}/",
+    "urlMain": "https://www.instagram.com/",
+    "errorMsg": "The link you followed may be broken",
+    "regexCheck": "^[a-zA-Z0-9_.]{1,30}$",
+    "username_claimed": "instagram",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Reddit": {
+    "errorType": "message",
+    "url": "https://www.reddit.com/user/{}/",
+    "urlMain": "https://www.reddit.com/",
+    "errorMsg": "Sorry, nobody on Reddit goes by that name",
+    "regexCheck": "^[a-zA-Z0-9_-]{3,20}$",
+    "username_claimed": "reddit",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "YouTube": {
+    "errorType": "message",
+    "url": "https://www.youtube.com/@{}",
+    "urlMain": "https://www.youtube.com/",
+    "errorMsg": "This channel does not exist",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "youtube",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "TikTok": {
+    "errorType": "message",
+    "url": "https://www.tiktok.com/@{}",
+    "urlMain": "https://www.tiktok.com/",
+    "errorMsg": "Couldn't find this account",
+    "regexCheck": "^[a-zA-Z0-9_.]{2,24}$",
+    "username_claimed": "tiktok",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "LinkedIn": {
+    "errorType": "status_code",
+    "url": "https://www.linkedin.com/in/{}/",
+    "urlMain": "https://www.linkedin.com/",
+    "regexCheck": "^[a-zA-Z0-9-]{3,100}$",
+    "username_claimed": "linkedin",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Pinterest": {
+    "errorType": "status_code",
+    "url": "https://www.pinterest.com/{}/",
+    "urlMain": "https://www.pinterest.com/",
+    "regexCheck": "^[a-zA-Z0-9_]{3,100}$",
+    "username_claimed": "pinterest",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Snapchat": {
+    "errorType": "message",
+    "url": "https://www.snapchat.com/add/{}",
+    "urlMain": "https://www.snapchat.com/",
+    "errorMsg": "Sorry, couldn't find",
+    "regexCheck": "^[a-zA-Z0-9_.]{3,15}$",
+    "username_claimed": "snapchat",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Twitch": {
+    "errorType": "status_code",
+    "url": "https://www.twitch.tv/{}",
+    "urlMain": "https://www.twitch.tv/",
+    "regexCheck": "^[a-zA-Z0-9_]{3,25}$",
+    "username_claimed": "twitch",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "GitLab": {
+    "errorType": "status_code",
+    "url": "https://gitlab.com/{}",
+    "urlMain": "https://gitlab.com/",
+    "regexCheck": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+    "username_claimed": "gitlab",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Bitbucket": {
+    "errorType": "status_code",
+    "url": "https://bitbucket.org/{}/",
+    "urlMain": "https://bitbucket.org/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,30}$",
+    "username_claimed": "bitbucket",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Medium": {
+    "errorType": "message",
+    "url": "https://medium.com/@{}",
+    "urlMain": "https://medium.com/",
+    "errorMsg": "Page not found",
+    "regexCheck": "^[a-zA-Z0-9._-]{1,150}$",
+    "username_claimed": "medium",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "DeviantArt": {
+    "errorType": "message",
+    "url": "https://www.deviantart.com/{}",
+    "urlMain": "https://www.deviantart.com/",
+    "errorMsg": "deviation not found",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,20}$",
+    "username_claimed": "deviantart",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Behance": {
+    "errorType": "status_code",
+    "url": "https://www.behance.net/{}",
+    "urlMain": "https://www.behance.net/",
+    "regexCheck": "^[a-zA-Z0-9-]{1,30}$",
+    "username_claimed": "behance",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Dribbble": {
+    "errorType": "status_code",
+    "url": "https://dribbble.com/{}",
+    "urlMain": "https://dribbble.com/",
+    "regexCheck": "^[a-zA-Z0-9-]{1,30}$",
+    "username_claimed": "dribbble",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Flickr": {
+    "errorType": "status_code",
+    "url": "https://www.flickr.com/people/{}/",
+    "urlMain": "https://www.flickr.com/",
+    "regexCheck": "^[a-zA-Z0-9@_-]{1,100}$",
+    "username_claimed": "flickr",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "SoundCloud": {
+    "errorType": "message",
+    "url": "https://soundcloud.com/{}",
+    "urlMain": "https://soundcloud.com/",
+    "errorMsg": "The page you were looking for doesn't exist",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,30}$",
+    "username_claimed": "soundcloud",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Spotify": {
+    "errorType": "status_code",
+    "url": "https://open.spotify.com/user/{}",
+    "urlMain": "https://open.spotify.com/",
+    "regexCheck": "^[a-zA-Z0-9a-zA-Z0-9_.-]{1,50}$",
+    "username_claimed": "spotify",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Telegram": {
+    "errorType": "status_code",
+    "url": "https://t.me/{}",
+    "urlMain": "https://t.me/",
+    "regexCheck": "^[a-zA-Z0-9_]{5,32}$",
+    "username_claimed": "telegram",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Vimeo": {
+    "errorType": "status_code",
+    "url": "https://vimeo.com/{}",
+    "urlMain": "https://vimeo.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,60}$",
+    "username_claimed": "vimeo",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Wikipedia": {
+    "errorType": "message",
+    "url": "https://en.wikipedia.org/wiki/User:{}",
+    "urlMain": "https://en.wikipedia.org/",
+    "errorMsg": "User does not exist",
+    "regexCheck": "^[a-zA-Z0-9 ]{1,50}$",
+    "username_claimed": "wikipedia",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "WordPress": {
+    "errorType": "status_code",
+    "url": "https://profiles.wordpress.org/{}/",
+    "urlMain": "https://profiles.wordpress.org/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,60}$",
+    "username_claimed": "wordpress",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Blogger": {
+    "errorType": "status_code",
+    "url": "https://{}.blogspot.com",
+    "urlMain": "https://www.blogger.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "blogger",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Tumblr": {
+    "errorType": "status_code",
+    "url": "https://{}.tumblr.com/",
+    "urlMain": "https://www.tumblr.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,32}$",
+    "username_claimed": "tumblr",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "About.me": {
+    "errorType": "status_code",
+    "url": "https://about.me/{}",
+    "urlMain": "https://about.me/",
+    "regexCheck": "^[a-zA-Z0-9_.-]{1,100}$",
+    "username_claimed": "aboutme",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Disqus": {
+    "errorType": "status_code",
+    "url": "https://disqus.com/{}",
+    "urlMain": "https://disqus.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,30}^",
+    "username_claimed": "disqus",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "SlideShare": {
+    "errorType": "status_code",
+    "url": "https://www.slideshare.net/{}",
+    "urlMain": "https://www.slideshare.net/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "slideshare",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Mastodon": {
+    "errorType": "status_code",
+    "url": "https://mastodon.social/@{}",
+    "urlMain": "https://mastodon.social/",
+    "regexCheck": "^[a-zA-Z0-9_]{1,30}$",
+    "username_claimed": "mastodon",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Xing": {
+    "errorType": "status_code",
+    "url": "https://www.xing.com/profile/{}",
+    "urlMain": "https://www.xing.com/",
+    "regexCheck": "^[a-zA-Z0-9_]{1,100}$",
+    "username_claimed": "xing",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Keybase": {
+    "errorType": "status_code",
+    "url": "https://keybase.io/{}",
+    "urlMain": "https://keybase.io/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "keybase",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Replit": {
+    "errorType": "status_code",
+    "url": "https://replit.com/@{}",
+    "urlMain": "https://replit.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,30}$",
+    "username_claimed": "replit",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "CodePen": {
+    "errorType": "status_code",
+    "url": "https://codepen.io/{}",
+    "urlMain": "https://codepen.io/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "codepen",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "GitHub Gist": {
+    "errorType": "status_code",
+    "url": "https://gist.github.com/{}",
+    "urlMain": "https://gist.github.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,39}$",
+    "username_claimed": "gist",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "HackerNews": {
+    "errorType": "message",
+    "url": "https://news.ycombinator.com/user?id={}",
+    "urlMain": "https://news.ycombinator.com/",
+    "errorMsg": "No such user",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,15}$",
+    "username_claimed": "hn",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Product Hunt": {
+    "errorType": "status_code",
+    "url": "https://www.producthunt.com/@{}",
+    "urlMain": "https://www.producthunt.com/",
+    "regexCheck": "^[a-zA-Z0-9_]{1,30}$",
+    "username_claimed": "producthunt",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Unsplash": {
+    "errorType": "status_code",
+    "url": "https://unsplash.com/@{}",
+    "urlMain": "https://unsplash.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "unsplash",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Pixabay": {
+    "errorType": "status_code",
+    "url": "https://pixabay.com/users/{}/",
+    "urlMain": "https://pixabay.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "pixabay",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "500px": {
+    "errorType": "status_code",
+    "url": "https://500px.com/p/{}/",
+    "urlMain": "https://500px.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "500px",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Imgur": {
+    "errorType": "status_code",
+    "url": "https://imgur.com/user/{}/",
+    "urlMain": "https://imgur.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,60}$",
+    "username_claimed": "imgur",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Gravatar": {
+    "errorType": "message",
+    "url": "https://en.gravatar.com/{}",
+    "urlMain": "https://en.gravatar.com/",
+    "errorMsg": "User does not exist",
+    "regexCheck": "^[a-f0-9]{32}$",
+    "username_claimed": "205e460b479e2e5b48aec07710c08d50",
+    "username_unclaimed": "00000000000000000000000000000000",
+    "request_method": "GET"
+  },
+  "Issuu": {
+    "errorType": "status_code",
+    "url": "https://issuu.com/{}",
+    "urlMain": "https://issuu.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "issuu",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Mix": {
+    "errorType": "status_code",
+    "url": "https://mix.com/{}",
+    "urlMain": "https://mix.com/",
+    "regexCheck": "^[a-zA-Z0-9_]{1,30}$",
+    "username_claimed": "mix",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Meetup": {
+    "errorType": "status_code",
+    "url": "https://www.meetup.com/members/{}/",
+    "urlMain": "https://www.meetup.com/",
+    "regexCheck": "^[0-9]+$",
+    "username_claimed": "123456",
+    "username_unclaimed": "999999999999",
+    "request_method": "GET"
+  },
+  "Goodreads": {
+    "errorType": "status_code",
+    "url": "https://www.goodreads.com/{}/",
+    "urlMain": "https://www.goodreads.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "goodreads",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Last.fm": {
+    "errorType": "status_code",
+    "url": "https://www.last.fm/user/{}/",
+    "urlMain": "https://www.last.fm/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "lastfm",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Steam": {
+    "errorType": "status_code",
+    "url": "https://steamcommunity.com/id/{}/",
+    "urlMain": "https://steamcommunity.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,32}$",
+    "username_claimed": "steam",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Roblox": {
+    "errorType": "status_code",
+    "url": "https://www.roblox.com/user.aspx?username={}",
+    "urlMain": "https://www.roblox.com/",
+    "regexCheck": "^[a-zA-Z0-9_]{3,20}$",
+    "username_claimed": "roblox",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Duolingo": {
+    "errorType": "status_code",
+    "url": "https://www.duolingo.com/profile/{}",
+    "urlMain": "https://www.duolingo.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "duolingo",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Kickstarter": {
+    "errorType": "status_code",
+    "url": "https://www.kickstarter.com/profile/{}/",
+    "urlMain": "https://www.kickstarter.com/",
+    "regexCheck": "^[0-9]+$",
+    "username_claimed": "12345678",
+    "username_unclaimed": "99999999",
+    "request_method": "GET"
+  },
+  "Trello": {
+    "errorType": "status_code",
+    "url": "https://trello.com/{}/",
+    "urlMain": "https://trello.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "trello",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Slack": {
+    "errorType": "status_code",
+    "url": "https://{}.slack.com/",
+    "urlMain": "https://slack.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,80}$",
+    "username_claimed": "slack",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Zoom": {
+    "errorType": "status_code",
+    "url": "https://zoom.us/user/{}/",
+    "urlMain": "https://zoom.us/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "zoom",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Skype": {
+    "errorType": "status_code",
+    "url": "https://join.skype.com/{}/",
+    "urlMain": "https://www.skype.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "skype",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Strava": {
+    "errorType": "status_code",
+    "url": "https://www.strava.com/athletes/{}/",
+    "urlMain": "https://www.strava.com/",
+    "regexCheck": "^[0-9]+$",
+    "username_claimed": "123456",
+    "username_unclaimed": "999999999",
+    "request_method": "GET"
+  },
+  "MySpace": {
+    "errorType": "status_code",
+    "url": "https://myspace.com/{}/",
+    "urlMain": "https://myspace.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "myspace",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Badoo": {
+    "errorType": "status_code",
+    "url": "https://badoo.com/profile/{}/",
+    "urlMain": "https://badoo.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "badoo",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Quora": {
+    "errorType": "status_code",
+    "url": "https://www.quora.com/profile/{}/",
+    "urlMain": "https://www.quora.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "quora",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Houzz": {
+    "errorType": "status_code",
+    "url": "https://www.houzz.com/pro/{}/",
+    "urlMain": "https://www.houzz.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "houzz",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "TripAdvisor": {
+    "errorType": "message",
+    "url": "https://www.tripadvisor.com/members/{}/",
+    "urlMain": "https://www.tripadvisor.com/",
+    "errorMsg": "This member does not exist",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "tripadvisor",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Trip.com": {
+    "errorType": "status_code",
+    "url": "https://www.trip.com/members/{}/",
+    "urlMain": "https://www.trip.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "trip",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Booking.com": {
+    "errorType": "status_code",
+    "url": "https://www.booking.com/profile/{}/",
+    "urlMain": "https://www.booking.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "booking",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Airbnb": {
+    "errorType": "status_code",
+    "url": "https://www.airbnb.com/users/show/{}/",
+    "urlMain": "https://www.airbnb.com/",
+    "regexCheck": "^[0-9]+$",
+    "username_claimed": "12345678",
+    "username_unclaimed": "999999999",
+    "request_method": "GET"
+  },
+  "Couchsurfing": {
+    "errorType": "status_code",
+    "url": "https://www.couchsurfing.com/people/{}/",
+    "urlMain": "https://www.couchsurfing.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "couchsurfing",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Wattpad": {
+    "errorType": "status_code",
+    "url": "https://www.wattpad.com/user/{}/",
+    "urlMain": "https://www.wattpad.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "wattpad",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Archive.org": {
+    "errorType": "status_code",
+    "url": "https://archive.org/details/@{}/",
+    "urlMain": "https://archive.org/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "archive",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Kofi": {
+    "errorType": "status_code",
+    "url": "https://ko-fi.com/{}/",
+    "urlMain": "https://ko-fi.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "kofi",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "BuyMeACoffee": {
+    "errorType": "status_code",
+    "url": "https://www.buymeacoffee.com/{}/",
+    "urlMain": "https://www.buymeacoffee.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "buymeacoffee",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Patreon": {
+    "errorType": "message",
+    "url": "https://www.patreon.com/{}/",
+    "urlMain": "https://www.patreon.com/",
+    "errorMsg": "Sorry, we couldn't find that page",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,30}$",
+    "username_claimed": "patreon",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "OnlyFans": {
+    "errorType": "status_code",
+    "url": "https://onlyfans.com/{}/",
+    "urlMain": "https://onlyfans.com/",
+    "regexCheck": "^[a-zA-Z0-9_]{1,50}$",
+    "username_claimed": "onlyfans",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "PayPal": {
+    "errorType": "message",
+    "url": "https://www.paypal.com/paypalme/{}/",
+    "urlMain": "https://www.paypal.com/",
+    "errorMsg": "We weren't able to find the page you're looking for",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,30}$",
+    "username_claimed": "paypal",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "CashApp": {
+    "errorType": "status_code",
+    "url": "https://cash.app/{}/",
+    "urlMain": "https://cash.app/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,20}$",
+    "username_claimed": "cashapp",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Venmo": {
+    "errorType": "status_code",
+    "url": "https://venmo.com/{}/",
+    "urlMain": "https://venmo.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,30}$",
+    "username_claimed": "venmo",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Foursquare": {
+    "errorType": "status_code",
+    "url": "https://foursquare.com/user/{}/",
+    "urlMain": "https://foursquare.com/",
+    "regexCheck": "^[0-9]+$",
+    "username_claimed": "123456",
+    "username_unclaimed": "999999999",
+    "request_method": "GET"
+  },
+  "Swarm": {
+    "errorType": "status_code",
+    "url": "https://swarmapp.com/user/{}/",
+    "urlMain": "https://swarmapp.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "swarm",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Untappd": {
+    "errorType": "status_code",
+    "url": "https://untappd.com/user/{}/",
+    "urlMain": "https://untappd.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,100}$",
+    "username_claimed": "untappd",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Letterboxd": {
+    "errorType": "status_code",
+    "url": "https://letterboxd.com/{}/",
+    "urlMain": "https://letterboxd.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "letterboxd",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Trakt": {
+    "errorType": "status_code",
+    "url": "https://trakt.tv/users/{}/",
+    "urlMain": "https://trakt.tv/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "trakt",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Discogs": {
+    "errorType": "status_code",
+    "url": "https://www.discogs.com/user/{}/",
+    "urlMain": "https://www.discogs.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "discogs",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Ello": {
+    "errorType": "status_code",
+    "url": "https://ello.co/{}/",
+    "urlMain": "https://ello.co/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "ello",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Minds": {
+    "errorType": "status_code",
+    "url": "https://www.minds.com/{}/",
+    "urlMain": "https://www.minds.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "minds",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Peertube": {
+    "errorType": "status_code",
+    "url": "https://peertube.social/c/{}/",
+    "urlMain": "https://peertube.social/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "peertube",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Pixelfed": {
+    "errorType": "status_code",
+    "url": "https://pixelfed.social/{}/",
+    "urlMain": "https://pixelfed.social/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "pixelfed",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Lemmy": {
+    "errorType": "status_code",
+    "url": "https://lemmy.world/u/{}/",
+    "urlMain": "https://lemmy.world/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "lemmy",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Rumble": {
+    "errorType": "status_code",
+    "url": "https://rumble.com/c/{}/",
+    "urlMain": "https://rumble.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "rumble",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Odysee": {
+    "errorType": "status_code",
+    "url": "https://odysee.com/@{}/",
+    "urlMain": "https://odysee.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "odysee",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "9GAG": {
+    "errorType": "status_code",
+    "url": "https://www.9gag.com/u/{}",
+    "urlMain": "https://www.9gag.com/",
+    "regexCheck": "^[a-zA-Z0-9_]{1,50}$",
+    "username_claimed": "9gag",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "AskFM": {
+    "errorType": "status_code",
+    "url": "https://ask.fm/{}",
+    "urlMain": "https://ask.fm/",
+    "regexCheck": "^[a-zA-Z0-9_]{1,50}$",
+    "username_claimed": "askfm",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Chess": {
+    "errorType": "status_code",
+    "url": "https://www.chess.com/member/{}",
+    "urlMain": "https://www.chess.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "chess",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Codecademy": {
+    "errorType": "status_code",
+    "url": "https://www.codecademy.com/profiles/{}",
+    "urlMain": "https://www.codecademy.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "codecademy",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Docker Hub": {
+    "errorType": "status_code",
+    "url": "https://hub.docker.com/u/{}",
+    "urlMain": "https://hub.docker.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "docker",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Fiverr": {
+    "errorType": "status_code",
+    "url": "https://www.fiverr.com/{}",
+    "urlMain": "https://www.fiverr.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "fiverr",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Freesound": {
+    "errorType": "status_code",
+    "url": "https://freesound.org/people/{}/",
+    "urlMain": "https://freesound.org/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "freesound",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Hackaday": {
+    "errorType": "status_code",
+    "url": "https://hackaday.io/{}",
+    "urlMain": "https://hackaday.io/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "hackaday",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Redbubble": {
+    "errorType": "status_code",
+    "url": "https://www.redbubble.com/people/{}",
+    "urlMain": "https://www.redbubble.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "redbubble",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Scratch": {
+    "errorType": "status_code",
+    "url": "https://scratch.mit.edu/users/{}",
+    "urlMain": "https://scratch.mit.edu/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "scratch",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "TryHackMe": {
+    "errorType": "status_code",
+    "url": "https://tryhackme.com/p/{}",
+    "urlMain": "https://tryhackme.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "tryhackme",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Typeracer": {
+    "errorType": "status_code",
+    "url": "https://data.typeracer.com/pit/profile?user={}",
+    "urlMain": "https://data.typeracer.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "typeracer",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "Zhihu": {
+    "errorType": "status_code",
+    "url": "https://www.zhihu.com/people/{}",
+    "urlMain": "https://www.zhihu.com/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "zhihu",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  },
+  "labpentestit": {
+    "errorType": "status_code",
+    "url": "https://lab.pentestit.ru/profile/{}",
+    "urlMain": "https://lab.pentestit.ru/",
+    "regexCheck": "^[a-zA-Z0-9_-]{1,50}$",
+    "username_claimed": "labpentestit",
+    "username_unclaimed": "noonewouldeverusethisxyz123",
+    "request_method": "GET"
+  }
+}

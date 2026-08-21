@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "AnonymousTrace"
+version = "0.1.0"
+description = "Data-driven OSINT username reconnaissance framework"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+authors = [{name = "OSINT Recon Contributors"}]
+keywords = ["osint", "username", "reconnaissance", "cli"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+dependencies = [
+    "requests>=2.31.0",
+    "requests-futures>=1.0.0",
+    "certifi>=2023.0.0",
+    "PySocks>=1.7.0",
+    "stem>=1.8.0",
+    "rich>=13.0.0",
+    "colorama>=0.4.6",
+    "pandas>=2.0.0",
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "pytest-asyncio>=0.21.0",
+    "aiohttp>=3.9.0",
+    "httpx>=0.25.0",
+]
+
+[project.scripts]
+AnonymousTrace = "anonymoustrace.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["anonymoustrace*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=anonymoustrace --cov-report=term-missing -v"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true

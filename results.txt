@@ -1,0 +1,10 @@
+OSINT Reconnaissance Results for: octocat
+==================================================
+
+Total checked: 1
+Found: 1
+Not Found: 0
+
+FOUND PROFILES:
+--------------------------------------------------
+[+] GitHub: https://github.com/octocat

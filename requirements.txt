@@ -1,0 +1,8 @@
+requests>=2.31.0
+requests-futures>=1.0.0
+certifi>=2023.0.0
+PySocks>=1.7.0
+stem>=1.8.0
+rich>=13.0.0
+colorama>=0.4.6
+pandas>=2.0.0

@@ -1,0 +1,2 @@
+username,site,detected,confidence,status_code,error
+octocat,GitHub,True,found,200,
