@@ -4,9 +4,7 @@ from __future__ import annotations
 
 import argparse
 import logging
-import os
 import sys
-import tempfile
 import webbrowser
 from pathlib import Path
 
@@ -15,10 +13,7 @@ if sys.platform == "win32":
     sys.stderr.reconfigure(encoding="utf-8")
 
 from rich import box
-from rich.align import Align
 from rich.console import Console
-from rich.layout import Layout
-from rich.live import Live
 from rich.panel import Panel
 from rich.progress import (
     BarColumn,

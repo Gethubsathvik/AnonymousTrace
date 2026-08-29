@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 import socket
-from typing import Optional
 from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
@@ -13,7 +12,7 @@ logger = logging.getLogger(__name__)
 class ProxyService:
     """Resolves and validates proxy URLs."""
 
-    def __init__(self, proxy_url: Optional[str] = None) -> None:
+    def __init__(self, proxy_url: str | None = None) -> None:
         self.proxy_url = proxy_url
         self._validate()
 
