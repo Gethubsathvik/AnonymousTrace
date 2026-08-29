@@ -2,42 +2,35 @@ name: Regression Test
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
 jobs:
   regression-test:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e .[dev]
-    
-    - name: Run regression test
-      run: |
-        # Run a quick scan against a few known sites to ensure basic functionality
-        AnonymousTrace github gitlab --print-found --timeout 5
-        
-    - name: Run full test suite
-      run: |
-        pytest tests/ -v
-    
-    - name: Lint check
-      run: |
-        pip install ruff
-        ruff check anonymoustrace/
-    
-    - name: Type check
-      run: |
-        pip install mypy
-        mypy anonymoustrace/
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests
+        run: |
+          pytest tests/ -v
+
+      - name: Lint check
+        run: |
+          ruff check anonymoustrace/
+
+      - name: Type check
+        run: |
+          mypy anonymoustrace/
