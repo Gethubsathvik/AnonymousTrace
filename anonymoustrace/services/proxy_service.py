@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import socket
 from typing import Optional
+from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +21,6 @@ class ProxyService:
         if not self.proxy_url:
             return
         try:
-            from urllib.parse import urlparse
             parsed = urlparse(self.proxy_url)
             if parsed.scheme not in ("http", "https", "socks4", "socks5"):
                 raise ValueError(f"Unsupported proxy scheme: {parsed.scheme}")
@@ -29,6 +29,7 @@ class ProxyService:
             raise ValueError(f"Invalid proxy configuration: {exc}") from exc
 
     def get_proxy_dict(self) -> dict[str, str]:
+        """Get proxy dictionary."""
         if not self.proxy_url:
             return {}
         return {"http": self.proxy_url, "https": self.proxy_url}
@@ -50,6 +51,7 @@ class TorService:
             return False
 
     def new_circuit(self) -> None:
+        """Request a new Tor circuit."""
         try:
             from stem import Signal
             from stem.control import Controller

@@ -4,31 +4,38 @@ from __future__ import annotations
 
 import argparse
 import logging
-import sys
-from pathlib import Path
-import webbrowser
-import tempfile
 import os
+import sys
+import tempfile
+import webbrowser
+from datetime import datetime
+from pathlib import Path
 
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
 
 from rich import box
-from rich.console import Console
-from rich.panel import Panel
-from rich.table import Table
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
-from rich.live import Live
-from rich.layout import Layout
 from rich.align import Align
+from rich.console import Console
+from rich.layout import Layout
+from rich.live import Live
+from rich.panel import Panel
+from rich.progress import (
+    BarColumn,
+    Progress,
+    SpinnerColumn,
+    TaskProgressColumn,
+    TextColumn,
+)
+from rich.table import Table
 
-from anonymoustrace.models import ConfidenceLevel, ScanResult
-from anonymoustrace.services.scan_service import ScanService
-from anonymoustrace.services.export_service import ExportService
-from anonymoustrace.services.proxy_service import ProxyService, TorService
 from anonymoustrace.features.scanning.http_client import HTTPClient
 from anonymoustrace.features.scanning.registry_loader import RegistryLoader
+from anonymoustrace.models import ConfidenceLevel, ScanResult
+from anonymoustrace.services.export_service import ExportService
+from anonymoustrace.services.proxy_service import ProxyService, TorService
+from anonymoustrace.services.scan_service import ScanService
 
 console = Console(legacy_windows=(sys.platform == "win32"))
 
@@ -46,23 +53,23 @@ FLAKY_SITES = {
 }
 
 BANNER = """[bold green]
- █████╗ ███╗   ██╗ ██████╗ ███╗   ██╗██╗   ██╗███╗   ███╗ ██████╗ ██╗   ██╗███████╗
-██╔══██╗████╗  ██║██╔═══██╗████╗  ██║╚██╗ ██╔╝████╗ ████║██╔═══██╗██║   ██║██╔════╝
-███████║██╔██╗ ██║██║   ██║██╔██╗ ██║ ╚████╔╝ ██╔████╔██║██║   ██║██║   ██║███████╗
-██╔══██║██║╚██╗██║██║   ██║██║╚██╗██║  ╚██╔╝  ██║╚██╔╝██║██║   ██║██║   ██║╚════██║
-██║  ██║██║ ╚████║╚██████╔╝██║ ╚████║   ██║   ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝███████║
-╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝
+ █████╗ ███╗   ██╗ ██████╗ ███╗   ██╗██╗   ██╗███╗   ███╗ ██████╗ ██╗   ██╗████╗   ████╗███████╗
+██╔══██║████╗  ██║██╔═══██╗████╗  ██║╚██╗ ██╔╝████╗ ████║██╔═══██╗██║   ██║██╔████╔╝██╔════╝
+███████║██╔██╗ ██║██║   ██║██╔██╗ ██║ ╚████╔╝ ██╔████╔██║██║   ██║██║   ██║██║╚██╔╝ ███████╗
+██╔══██║██║╚██╗██║██║   ██║██║╚██╗██║  ╚██╔╝  ██║╚██╔╝██║██║   ██║██║   ██║██║ ╚═╝  ╚════██║
+██║  ██║██║ ╚████║╚██████╔╝██║ ╚████║   ██║   ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║     ███████║
+╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚══════╝
 
-                 👻  A N O N Y M O U S   T R A C E  👻
-              ───────────────────────────────────────────
-                    OSINT • RECON • IDENTITY SEARCH
+                  👻  A N O N Y M O U S   T R A C E  👻
+               ───────────────────────────────────────────
+                     OSINT • RECON • IDENTITY SEARCH
 
 ========================================
-         AnonymousTrace
+          AnonymousTrace
 ========================================
-   AUTHORIZED USE ONLY
-   Do not use for stalking,
-   harassment, or doxxing.
+    AUTHORIZED USE ONLY
+    Do not use for stalking,
+    harassment, or doxxing.
 ========================================
 [/bold green]"""
 
@@ -223,7 +230,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     # Superpowers flags (original extensions)
     parser.add_argument(
-        "-s", "--scan",
+        "-s",
+        "--scan",
         action="store_true",
         help="Quick scan mode - fast scan with default settings",
     )
@@ -364,7 +372,7 @@ def run_cli(args: argparse.Namespace) -> int:
         if skipped:
             console.print(f"[yellow]Skipping {len(skipped)} flaky sites: {', '.join(skipped)}[/yellow]")
 
-    proxy_service = ProxyService(args.proxy)
+    ProxyService(args.proxy)  # Validate proxy
     tor_service = TorService() if (args.tor or args.unique_tor) else None
 
     if args.tor or args.unique_tor:
@@ -410,14 +418,14 @@ def run_cli(args: argparse.Namespace) -> int:
                 console.print(f"\n[*] Checking username {username} on:")
             else:
                 console.print(f"\n[bold cyan]Scanning:[/bold cyan] {username}")
-            
+
             target_sites = list(scan_service.scanner.registry.values())
             if args.sites:
                 registry_lower = {k.lower(): v for k, v in scan_service.scanner.registry.items()}
                 target_sites = [registry_lower[s.lower()] for s in args.sites if s.lower() in registry_lower]
-            
+
             total_sites = len(target_sites) if target_sites else 1
-            
+
             with Progress(
                 SpinnerColumn(),
                 TextColumn("[progress.description]{task.description}"),
@@ -427,24 +435,24 @@ def run_cli(args: argparse.Namespace) -> int:
                 transient=True,
             ) as progress:
                 task = progress.add_task(f"Scanning {username}...", total=100)
-                
+
                 class ProgressCallback:
                     def __init__(self, total: int):
                         self.total = max(total, 1)
                         self.completed = 0
-                    
-                    def update(self, result: ScanResult):
+
+                    def update(self, result: ScanResult) -> None:
                         self.completed += 1
                         progress.update(task, completed=int(self.completed / self.total * 100))
-                
+
                 callback = ProgressCallback(total_sites)
-                
+
                 original_scan_site = scan_service.scanner.scan_site
                 def wrapped_scan_site(site, username):
                     result = original_scan_site(site, username)
                     callback.update(result)
                     return result
-                
+
                 scan_service.scanner.scan_site = wrapped_scan_site
                 results = scan_service.execute(
                     usernames=[username],
@@ -453,9 +461,9 @@ def run_cli(args: argparse.Namespace) -> int:
                     username_for_export=username,
                 )
                 scan_service.scanner.scan_site = original_scan_site
-                
+
                 progress.update(task, completed=100)
-            
+
             all_results.extend(results)
             display_results(console, results, args)
 
@@ -496,7 +504,11 @@ def display_results(
     found_pct = (found_count / total * 100) if total else 0
     not_found_pct = (not_found_count / total * 100) if total else 0
 
-    console.print(f"\n[bold]Total checked:[/bold] {total} | [green]Found: {found_count} ({found_pct:.0f}%)[/green] | [red]Not Found: {not_found_count} ({not_found_pct:.0f}%)[/red]")
+    console.print(
+        f"\n[bold]Total checked:[/bold] {total} | [green]Found: {found_count} "
+        f"({found_pct:.0f}%)[/green] | [red]Not Found: {not_found_count} "
+        f"({not_found_pct:.0f}%)[/red]"
+    )
 
     if not results:
         console.print("[yellow]No results to display.[/yellow]")
@@ -519,11 +531,9 @@ def display_results(
     for r in display_set:
         if r.detected:
             detected_str = "[bold green]YES[/bold green]"
-            conf_style = "bold green"
             site_style = "bold green"
         else:
             detected_str = "[bold red]NO[/bold red]"
-            conf_style = "bold red"
             site_style = "bold red"
 
         conf_color = {
@@ -549,7 +559,8 @@ def display_results(
             url = r.response_url or r.metadata.get("url", "N/A")
             console.print(f"  [green]*[/green] [bold cyan]{r.site_name}:[/bold cyan] {url}")
 
-    console.print(f"\n[dim]Scan completed at {__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S')}[/dim]")
+    scan_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    console.print(f"\n[dim]Scan completed at {scan_time}[/dim]")
 
 
 def browse_results(results: list[ScanResult]) -> None:
@@ -558,7 +569,7 @@ def browse_results(results: list[ScanResult]) -> None:
     if not found:
         console.print("[yellow]No results to browse.[/yellow]")
         return
-    
+
     console.print(f"[cyan]Opening {len(found)} results in browser...[/cyan]")
     for r in found:
         url = r.response_url or r.metadata.get("url")

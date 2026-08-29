@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 from typing import Any
-from urllib.parse import urljoin
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -111,7 +110,13 @@ class HTTPClient:
                 return None
 
             if self.dump_response:
-                logger.info("Response for %s (%s): status=%s, body=%s", site.name, url, resp.status_code, resp.text[:500])
+                logger.info(
+                    "Response for %s (%s): status=%s, body=%s",
+                    site.name,
+                    url,
+                    resp.status_code,
+                    resp.text[:500],
+                )
 
             return resp
         except requests.exceptions.Timeout:
@@ -127,4 +132,5 @@ class HTTPClient:
         return None
 
     def close(self) -> None:
+        """Close the session."""
         self.session.close()
