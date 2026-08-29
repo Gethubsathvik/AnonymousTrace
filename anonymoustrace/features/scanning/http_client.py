@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 from typing import Any
+from urllib.parse import urljoin
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -40,7 +41,9 @@ class HTTPClient:
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["GET", "POST", "HEAD"],
         )
-        adapter = HTTPAdapter(max_retries=retry, pool_connections=100, pool_maxsize=100)
+        adapter = HTTPAdapter(
+            max_retries=retry, pool_connections=100, pool_maxsize=100
+        )
         session.mount("https://", adapter)
         session.mount("http://", adapter)
 
@@ -132,5 +135,4 @@ class HTTPClient:
         return None
 
     def close(self) -> None:
-        """Close the session."""
         self.session.close()

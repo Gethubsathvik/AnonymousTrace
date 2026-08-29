@@ -8,7 +8,6 @@ import os
 import sys
 import tempfile
 import webbrowser
-from datetime import datetime
 from pathlib import Path
 
 if sys.platform == "win32":
@@ -53,12 +52,12 @@ FLAKY_SITES = {
 }
 
 BANNER = """[bold green]
- █████╗ ███╗   ██╗ ██████╗ ███╗   ██╗██╗   ██╗███╗   ███╗ ██████╗ ██╗   ██╗████╗   ████╗███████╗
-██╔══██║████╗  ██║██╔═══██╗████╗  ██║╚██╗ ██╔╝████╗ ████║██╔═══██╗██║   ██║██╔████╔╝██╔════╝
-███████║██╔██╗ ██║██║   ██║██╔██╗ ██║ ╚████╔╝ ██╔████╔██║██║   ██║██║   ██║██║╚██╔╝ ███████╗
-██╔══██║██║╚██╗██║██║   ██║██║╚██╗██║  ╚██╔╝  ██║╚██╔╝██║██║   ██║██║   ██║██║ ╚═╝  ╚════██║
-██║  ██║██║ ╚████║╚██████╔╝██║ ╚████║   ██║   ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝██║     ███████║
-╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝     ╚══════╝
+ █████╗ ███╗   ██╗ ██████╗ ███╗   ██╗██╗   ██╗███╗   ███╗ ██████╗ ██╗   ██╗████████╗
+██╔══██╗████╗  ██║██╔═══██╗████╗  ██║╚██╗ ██╔╝████╗ ████║██╔═══██╗██║   ██║╚══██╔══╝
+███████║██╔██╗ ██║██║   ██║██╔██╗ ██║ ╚████╔╝ ██╔████╔██║██║   ██║██║   ██║   ██║   
+██╔══██║██║╚██╗██║██║   ██║██║╚██╗██║  ╚██╔╝  ██║╚██╔╝██║██║   ██║██║   ██║   ██║   
+██║  ██║██║ ╚████║╚██████╔╝██║ ╚████║   ██║   ██║ ╚═╝ ██║╚██████╔╝╚██████╔╝   ██║   
+╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝     ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   
 
                   👻  A N O N Y M O U S   T R A C E  👻
                ───────────────────────────────────────────
@@ -269,13 +268,17 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def run_cli(args: argparse.Namespace) -> int:
-    console = Console(no_color=args.no_color, legacy_windows=(sys.platform == "win32"))
+    console_instance = Console(
+        no_color=args.no_color, legacy_windows=(sys.platform == "win32")
+    )
 
-    console.print(Panel(BANNER, border_style="red", expand=False))
+    console_instance.print(Panel(BANNER, border_style="red", expand=False))
 
     # Handle version flag
     if getattr(args, "version", False):
-        console.print(f"[bold]AnonymousTrace[/bold] version [cyan]{__version__}[/cyan]")
+        console_instance.print(
+            f"[bold]AnonymousTrace[/bold] version [cyan]{__version__}[/cyan]"
+        )
         return 0
 
     # Handle list-sites flag
@@ -283,12 +286,14 @@ def run_cli(args: argparse.Namespace) -> int:
         loader = RegistryLoader()
         try:
             sites = loader.list_sites()
-            console.print(f"\n[bold cyan]Available Platforms ({len(sites)} total):[/bold cyan]\n")
+            console_instance.print(
+                f"\n[bold cyan]Available Platforms ({len(sites)} total):[/bold cyan]\n"
+            )
             for i, site in enumerate(sites, 1):
-                console.print(f"  {i:3d}. {site}")
+                console_instance.print(f"  {i:3d}. {site}")
             return 0
         except FileNotFoundError as exc:
-            console.print(f"[red]{exc}[/red]")
+            console_instance.print(f"[red]{exc}[/red]")
             return 1
 
     # Super mode enables multiple flags
@@ -325,11 +330,13 @@ def run_cli(args: argparse.Namespace) -> int:
 
     # Warnings for flags that don't change behavior yet
     if args.local:
-        console.print("[yellow]Using local registry (default behavior)[/yellow]")
+        console_instance.print("[yellow]Using local registry (default behavior)[/yellow]")
     if args.nsfw:
-        console.print("[yellow]NSFW sites are not included in the default registry[/yellow]")
+        console_instance.print(
+            "[yellow]NSFW sites are not included in the default registry[/yellow]"
+        )
     if args.ignore_exclusions:
-        console.print("[yellow]No upstream exclusions to ignore[/yellow]")
+        console_instance.print("[yellow]No upstream exclusions to ignore[/yellow]")
 
     log_level = logging.WARNING
     if args.verbose >= 2:
@@ -346,38 +353,42 @@ def run_cli(args: argparse.Namespace) -> int:
     if args.input_file:
         input_path = Path(args.input_file)
         if not input_path.exists():
-            console.print(f"[red]Input file not found: {input_path}[/red]")
+            console_instance.print(f"[red]Input file not found: {input_path}[/red]")
             return 1
         with open(input_path, encoding="utf-8") as f:
             file_users = [line.strip() for line in f if line.strip()]
         usernames.extend(file_users)
 
     if not usernames:
-        console.print("[red]No usernames provided.[/red]")
+        console_instance.print("[red]No usernames provided.[/red]")
         return 1
 
     loader = RegistryLoader(registry_path=args.data_file)
     try:
         registry = loader.load()
     except FileNotFoundError as exc:
-        console.print(f"[red]{exc}[/red]")
+        console_instance.print(f"[red]{exc}[/red]")
         return 1
     except ValueError as exc:
-        console.print(f"[red]{exc}[/red]")
+        console_instance.print(f"[red]{exc}[/red]")
         return 1
 
     if args.skip_flaky:
         skipped = [s for s in registry if s in FLAKY_SITES]
         registry = {k: v for k, v in registry.items() if k not in FLAKY_SITES}
         if skipped:
-            console.print(f"[yellow]Skipping {len(skipped)} flaky sites: {', '.join(skipped)}[/yellow]")
+            console_instance.print(
+                f"[yellow]Skipping {len(skipped)} flaky sites: {', '.join(skipped)}[/yellow]"
+            )
 
-    ProxyService(args.proxy)  # Validate proxy
+    proxy_service = ProxyService(args.proxy)
     tor_service = TorService() if (args.tor or args.unique_tor) else None
 
     if args.tor or args.unique_tor:
         if tor_service is not None and not tor_service.is_running():
-            console.print("[yellow]Warning: Tor SOCKS proxy not detected on 127.0.0.1:9050[/yellow]")
+            console_instance.print(
+                "[yellow]Warning: Tor SOCKS proxy not detected on 127.0.0.1:9050[/yellow]"
+            )
 
     http_client = HTTPClient(
         timeout=args.timeout,
@@ -415,14 +426,20 @@ def run_cli(args: argparse.Namespace) -> int:
         all_results: list[ScanResult] = []
         for username in usernames:
             if args.plain:
-                console.print(f"\n[*] Checking username {username} on:")
+                console_instance.print(f"\n[*] Checking username {username} on:")
             else:
-                console.print(f"\n[bold cyan]Scanning:[/bold cyan] {username}")
+                console_instance.print(f"\n[bold cyan]Scanning:[/bold cyan] {username}")
 
             target_sites = list(scan_service.scanner.registry.values())
             if args.sites:
-                registry_lower = {k.lower(): v for k, v in scan_service.scanner.registry.items()}
-                target_sites = [registry_lower[s.lower()] for s in args.sites if s.lower() in registry_lower]
+                registry_lower = {
+                    k.lower(): v for k, v in scan_service.scanner.registry.items()
+                }
+                target_sites = [
+                    registry_lower[s.lower()]
+                    for s in args.sites
+                    if s.lower() in registry_lower
+                ]
 
             total_sites = len(target_sites) if target_sites else 1
 
@@ -431,7 +448,7 @@ def run_cli(args: argparse.Namespace) -> int:
                 TextColumn("[progress.description]{task.description}"),
                 BarColumn(),
                 TaskProgressColumn(),
-                console=console,
+                console=console_instance,
                 transient=True,
             ) as progress:
                 task = progress.add_task(f"Scanning {username}...", total=100)
@@ -441,13 +458,17 @@ def run_cli(args: argparse.Namespace) -> int:
                         self.total = max(total, 1)
                         self.completed = 0
 
-                    def update(self, result: ScanResult) -> None:
+                    def update(self, result: ScanResult):
                         self.completed += 1
-                        progress.update(task, completed=int(self.completed / self.total * 100))
+                        progress.update(
+                            task,
+                            completed=int(self.completed / self.total * 100),
+                        )
 
                 callback = ProgressCallback(total_sites)
 
                 original_scan_site = scan_service.scanner.scan_site
+
                 def wrapped_scan_site(site, username):
                     result = original_scan_site(site, username)
                     callback.update(result)
@@ -465,18 +486,22 @@ def run_cli(args: argparse.Namespace) -> int:
                 progress.update(task, completed=100)
 
             all_results.extend(results)
-            display_results(console, results, args)
+            display_results(console_instance, results, args)
 
         if len(usernames) > 1:
             if args.plain:
-                console.print(f"\n[*] Search completed with {len(all_results)} results.")
+                console_instance.print(
+                    f"\n[*] Search completed with {len(all_results)} results."
+                )
             else:
-                console.print("\n[bold yellow]=== Aggregate Summary ===[/bold yellow]")
-                display_results(console, all_results, args)
+                console_instance.print(
+                    "\n[bold yellow]=== Aggregate Summary ===[/bold yellow]"
+                )
+                display_results(console_instance, all_results, args)
 
         # Browse results if requested
         if args.browse:
-            browse_results(all_results)
+            browse_results(all_results, console_instance)
 
         return 0
     finally:
@@ -484,7 +509,7 @@ def run_cli(args: argparse.Namespace) -> int:
 
 
 def display_results(
-    console: Console,
+    console_instance: Console,
     results: list[ScanResult],
     args: argparse.Namespace,
 ) -> None:
@@ -494,8 +519,10 @@ def display_results(
     if args.plain:
         for r in found:
             url = r.response_url or r.metadata.get("url", "N/A")
-            console.print(f"[+] {r.site_name}: {url}")
-        console.print(f"\n[*] Search completed with {len(found)} results.")
+            console_instance.print(f"[+] {r.site_name}: {url}")
+        console_instance.print(
+            f"\n[*] Search completed with {len(found)} results."
+        )
         return
 
     total = len(results)
@@ -504,14 +531,12 @@ def display_results(
     found_pct = (found_count / total * 100) if total else 0
     not_found_pct = (not_found_count / total * 100) if total else 0
 
-    console.print(
-        f"\n[bold]Total checked:[/bold] {total} | [green]Found: {found_count} "
-        f"({found_pct:.0f}%)[/green] | [red]Not Found: {not_found_count} "
-        f"({not_found_pct:.0f}%)[/red]"
+    console_instance.print(
+        f"\n[bold]Total checked:[/bold] {total} | [green]Found: {found_count} ({found_pct:.0f}%)[/green] | [red]Not Found: {not_found_count} ({not_found_pct:.0f}%)[/red]"
     )
 
     if not results:
-        console.print("[yellow]No results to display.[/yellow]")
+        console_instance.print("[yellow]No results to display.[/yellow]")
         return
 
     if args.print_all:
@@ -531,9 +556,11 @@ def display_results(
     for r in display_set:
         if r.detected:
             detected_str = "[bold green]YES[/bold green]"
+            conf_style = "bold green"
             site_style = "bold green"
         else:
             detected_str = "[bold red]NO[/bold red]"
+            conf_style = "bold red"
             site_style = "bold red"
 
         conf_color = {
@@ -551,26 +578,31 @@ def display_results(
             r.error or "[dim]-[/dim]",
         )
 
-    console.print(table)
+    console_instance.print(table)
 
     if found:
-        console.print("\n[bold green]Found profiles:[/bold green]")
+        console_instance.print("\n[bold green]Found profiles:[/bold green]")
         for r in found:
             url = r.response_url or r.metadata.get("url", "N/A")
-            console.print(f"  [green]*[/green] [bold cyan]{r.site_name}:[/bold cyan] {url}")
+            console_instance.print(
+                f"  [green]*[/green] [bold cyan]{r.site_name}:[/bold cyan] {url}"
+            )
 
-    scan_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    console.print(f"\n[dim]Scan completed at {scan_time}[/dim]")
+    console_instance.print(
+        f"\n[dim]Scan completed at {__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S')}[/dim]"
+    )
 
 
-def browse_results(results: list[ScanResult]) -> None:
+def browse_results(results: list[ScanResult], console_instance: Console) -> None:
     """Open found results in the default browser."""
     found = [r for r in results if r.detected]
     if not found:
-        console.print("[yellow]No results to browse.[/yellow]")
+        console_instance.print("[yellow]No results to browse.[/yellow]")
         return
 
-    console.print(f"[cyan]Opening {len(found)} results in browser...[/cyan]")
+    console_instance.print(
+        f"[cyan]Opening {len(found)} results in browser...[/cyan]"
+    )
     for r in found:
         url = r.response_url or r.metadata.get("url")
         if url:

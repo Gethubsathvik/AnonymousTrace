@@ -7,12 +7,12 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
-from anonymoustrace.models import ConfidenceLevel, Site, ScanResult
 from anonymoustrace.features.detection import (
     build_detector,
     validate_username,
 )
 from anonymoustrace.features.scanning.http_client import HTTPClient
+from anonymoustrace.models import ConfidenceLevel, Site, ScanResult
 
 logger = logging.getLogger(__name__)
 
@@ -118,7 +118,9 @@ class ConcurrentScanner:
                 except Exception as exc:
                     logger.error(
                         "Scanner error for %s@%s: %s",
-                        username, site_name, exc
+                        username,
+                        site_name,
+                        exc,
                     )
 
         return results
