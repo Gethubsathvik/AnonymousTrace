@@ -2,9 +2,7 @@
 
 from unittest.mock import Mock, patch
 
-import pytest
-
-from anonymoustrace.models import Site, ErrorType
+from anonymoustrace.models import ErrorType
 from anonymoustrace.features.detection import build_detector
 from anonymoustrace.features.detection.detectors import (
     StatusCodeDetector,
