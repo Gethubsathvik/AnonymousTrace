@@ -1,8 +1,8 @@
 """Test configuration and fixtures."""
 
 import pytest
-from anonymoustrace.models import Site, ErrorType
-from anonymoustrace.features.detection.detectors
+from anonymoustrace.models import ErrorType, Site
+from anonymoustrace.features.detection.detectors import BaseDetector
 
 @pytest.fixture
 def sample_sites():
