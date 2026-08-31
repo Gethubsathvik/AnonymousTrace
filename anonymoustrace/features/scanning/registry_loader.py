@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from urllib.parse import urlparse
+
 
 import requests
 
@@ -51,7 +51,7 @@ class RegistryLoader:
                 raise FileNotFoundError(
                     f"Registry not found at {path}"
                 )
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 raw = json.load(f)
 
         registry: dict[str, Site] = {}
@@ -70,6 +70,6 @@ class RegistryLoader:
         if self._is_url(self.registry_path):
             raw = self._load_from_url(str(self.registry_path))
         else:
-            with open(self.registry_path, "r", encoding="utf-8") as f:
+            with open(self.registry_path, encoding="utf-8") as f:
                 raw = json.load(f)
         return list(raw.keys())
