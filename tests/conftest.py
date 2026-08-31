@@ -2,13 +2,7 @@
 
 import pytest
 from anonymoustrace.models import Site, ErrorType
-from anonymoustrace.features.detection.detectors import (
-    StatusCodeDetector,
-    MessageDetector,
-    ResponseUrlDetector,
-    HybridDetector,
-)
-
+from anonymoustrace.features.detection.detectors
 
 @pytest.fixture
 def sample_sites():
