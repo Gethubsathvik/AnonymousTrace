@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 
-
 from anonymoustrace.features.scanning.concurrent_scanner import ConcurrentScanner
 from anonymoustrace.features.scanning.http_client import HTTPClient
 from anonymoustrace.models import ScanResult, Site
@@ -12,7 +11,6 @@ from anonymoustrace.services.detection_service import DetectionService
 from anonymoustrace.services.export_service import ExportService
 
 logger = logging.getLogger(__name__)
-
 
 class ScanService:
     """High-level scan orchestrator wiring all services together."""
