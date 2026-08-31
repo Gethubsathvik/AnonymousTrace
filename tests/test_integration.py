@@ -2,8 +2,6 @@
 
 from unittest.mock import Mock, patch
 
-import pytest
-
 from anonymoustrace.models import Site, ErrorType
 from anonymoustrace.features.detection.detectors import validate_username
 from anonymoustrace.services.scan_service import ScanService
