@@ -11,7 +11,6 @@ from anonymoustrace.features.scanning.registry_loader import RegistryLoader
 from anonymoustrace.models import Site, ScanResult
 from anonymoustrace.services.detection_service import DetectionService
 from anonymoustrace.services.export_service import ExportService
-from anonymoustrace.services.proxy_service import ProxyService, TorService
 
 logger = logging.getLogger(__name__)
 
