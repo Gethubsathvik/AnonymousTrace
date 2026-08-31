@@ -26,7 +26,7 @@ from rich.table import Table
 
 from anonymoustrace.features.scanning.http_client import HTTPClient
 from anonymoustrace.features.scanning.registry_loader import RegistryLoader
-from anonymoustrace.models import ConfidenceLevel, ScanResult
+from anonymoustrace.models import ScanResult
 from anonymoustrace.services.export_service import ExportService
 from anonymoustrace.services.proxy_service import ProxyService, TorService
 from anonymoustrace.services.scan_service import ScanService
@@ -376,7 +376,6 @@ def run_cli(args: argparse.Namespace) -> int:
                 f"[yellow]Skipping {len(skipped)} flaky sites: {', '.join(skipped)}[/yellow]"
             )
 
-    proxy_service = ProxyService(args.proxy)
     tor_service = TorService() if (args.tor or args.unique_tor) else None
 
     if args.tor or args.unique_tor:
@@ -555,7 +554,6 @@ def display_results(
             site_style = "bold green"
         else:
             detected_str = "[bold red]NO[/bold red]"
-            conf_style = "bold red"
             site_style = "bold red"
 
         conf_color = {
