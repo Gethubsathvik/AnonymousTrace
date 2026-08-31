@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
 
 import requests
 from requests.adapters import HTTPAdapter
