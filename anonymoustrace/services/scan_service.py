@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
+
 
 from anonymoustrace.features.scanning.concurrent_scanner import ConcurrentScanner
 from anonymoustrace.features.scanning.http_client import HTTPClient
-from anonymoustrace.features.scanning.registry_loader import RegistryLoader
-from anonymoustrace.models import Site, ScanResult
+from anonymoustrace.models import ScanResult, Site
 from anonymoustrace.services.detection_service import DetectionService
 from anonymoustrace.services.export_service import ExportService
 
