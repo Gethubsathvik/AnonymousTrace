@@ -30,7 +30,8 @@ jobs:
     - name: Lint with Ruff
       run: |
         # Run ruff check to verify code formatting and imports
-        ruff check --fix --unsafe-fixes .
+        # Removed unsupported --unsafe-fixes flag
+        ruff check --fix .
 
     - name: Test with Pytest
       run: |
