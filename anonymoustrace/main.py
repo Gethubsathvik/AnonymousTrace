@@ -548,9 +548,8 @@ def display_results(
     table.add_column("Error", style="dim")
 
     for r in display_set:
-        if r.detected:
+       if r.detected:
             detected_str = "[bold green]YES[/bold green]"
-            conf_style = "bold green"
             site_style = "bold green"
         else:
             detected_str = "[bold red]NO[/bold red]"
